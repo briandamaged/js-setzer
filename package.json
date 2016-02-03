@@ -1,0 +1,24 @@
+{
+  "name": "setzer",
+  "version": "1.0.0",
+  "description": "Set-theory operations in Javascript",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/briandamaged/js-setzer.git"
+  },
+  "keywords": [
+    "set",
+    "theory",
+    "mathematics"
+  ],
+  "author": "Brian Lauber",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/briandamaged/js-setzer/issues"
+  },
+  "homepage": "https://github.com/briandamaged/js-setzer#readme"
+}
