@@ -2,34 +2,25 @@
 // Creates an internal (AKA: Ugly) representation of the sets.
 
 function fromArray(thing) {
-  var retval = {};
+  var retval = [];
   for(var i = 0; i < thing.length; ++i) {
-    var k = thing[i];
-    var hits = retval[k];
-    if(!hits) {
-      hits = retval[k] = [];
-    }
-
-    if(hits.indexOf(k) < 0) {
-      hits.push(k)
+    var item = thing[i];
+    if(retval.indexOf(item) < 0) {
+      retval.push(item);
     }
   }
   return retval;
 }
 
 function fromObject(thing) {
-  var retval = {};
-  for(var k in thing) {
-    retval[k] = [k];
-  }
-  return retval;
+  return Object.keys(thing);
 }
 
 function coerce(thing) {
   if(Array.isArray(thing)) {
     return fromArray(thing);
   } else if(typeof(thing) === 'undefined') {
-    return {};
+    return [];
   } else {
     return fromObject(thing);
   }

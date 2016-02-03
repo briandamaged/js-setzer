@@ -22,37 +22,57 @@ function Setzer(_set) {
 
 Setzer.prototype = {
   get length() {
-    if(this._lengthCalculated) {
-      return this._length;
-    } else {
-      var len = 0;
-      for(var k in this._set) {
-        len += this._set[k].length;
-      }
-      this._length = len
-      this._lengthCalculated = true;
-      return len;
-    }
+    return this._set.length;
+  },
+
+  isEmpty: function() {
+    return this.length === 0;
   },
 
   keys: function() {
-    if(this._keysCalculated) {
-      return this._keys.slice();
-    } else {
-      var keys = new Array(this.length);
-      var i = 0;
+    return this._set.slice();
+  },
 
-      for(var k in this._set) {
-        var items = this._set[k];
-        for(var j in items) {
-          keys[i++] = items[j];
-        }
+  minus: function(rhs) {
+    rhs = coerce(rhs)._set;
+    var lhs = this._set;
+    var retval = [];
+
+    for(var i = 0; i < lhs.length; ++i) {
+      var item = lhs[i];
+      if(rhs.indexOf(item) < 0) {
+        retval.push(item);
       }
-
-      this._keys = keys;
-      this._keysCalculated = true;
-      return keys.slice();
     }
+    return new Setzer(retval);
+  },
+
+  intersect: function(rhs) {
+    rhs = coerce(rhs)._set;
+    var lhs = this._set;
+    var retval = [];
+
+    for(var i = 0; i < lhs.length; ++i) {
+      var item = lhs[i];
+      if(rhs.indexOf(item) >= 0) {
+        retval.push(item);
+      }
+    }
+    return new Setzer(retval);
+  },
+
+  union: function(rhs) {
+    rhs = coerce(rhs)._set;
+    var retval = this._set.slice();
+
+    for(var i = 0; i < rhs.length; ++i) {
+      var item = rhs[i];
+
+      if(retval.indexOf(item) < 0) {
+        retval.push(item);
+      }
+    }
+    return new Setzer(retval);
   }
 }
 
